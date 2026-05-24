@@ -285,7 +285,7 @@ app.get('/api/usuarios', async (req, res) => {
 // Lista de usuarios activos (para selector de reportes)
 app.get('/api/usuarios/lista', async (req, res) => {
   try {
-    const resultado = await pool.query(`SELECT ID_Usuario AS "ID_USUARIO", Nombre_Completo AS "NOMBRE_COMPLETO" FROM Usuarios WHERE Estado = 'ACTIVO' ORDER BY Nombre_Completo`);
+    const resultado = await pool.query(`SELECT ID_Usuario AS "ID_USUARIO", Nombre_Completo AS "NOMBRE_COMPLETO" FROM Usuarios WHERE Estado = 'ACTIVO' AND Usuario != 'admin' ORDER BY Nombre_Completo`);
     res.json({ exito: true, usuarios: resultado.rows });
   } catch (error) { res.status(500).json({ exito: false }); }
 });
